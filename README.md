@@ -1,2 +1,1 @@
-# Clone-to-practice
-Just for practice
+project Rock paper and scissor
