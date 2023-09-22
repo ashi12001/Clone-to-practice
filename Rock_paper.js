@@ -23,26 +23,45 @@ function getComputerChoice(){
 // so: "You Lose! Paper beats Rock"
 // Make your function’s playerSelection parameter case-insensitive (so users can input rock, ROCK, RocK or any other variation).
 
-
+let computerScore=0 ;
+let yourScore=0;
 
 function singleRound(playerSelection,computerSelection){
     playerSelection = playerSelection.toLowerCase();
     if(playerSelection==computerSelection) return "it's a draw ";
     else if (playerSelection=="rock") {
-        if(computerSelection=="scissor") return `you won your opponent chose ${computerSelection}`;
-        else return  `you lose your opponent chose ${computerSelection}`;
+        if(computerSelection=="scissor"){ 
+            ++yourScore;
+            return `you won your opponent chose ${computerSelection}`;
+        }
+        else {
+            ++computerScore;
+            return  `you lose your opponent chose ${computerSelection}`;
+        }
     }
     else if (playerSelection=="scissor") {
-        if(computerSelection=="paper") return `you won your opponent chose ${computerSelection}`;
-        else return  `you lose your opponent chose ${computerSelection}`;
+        if(computerSelection=="paper"){
+            ++yourScore;
+             return `you won your opponent chose ${computerSelection}`;
+        }
+        else {
+            ++computerScore;
+            return  `you lose your opponent chose ${computerSelection}`;
+        }
     }
     else  {
-        if(computerSelection=="scissor") return `you lose your opponent chose ${computerSelection}`;
-        else return  `you won your opponent chose ${computerSelection}`;
+        if(computerSelection=="scissor") {
+            ++computerScore;
+            return `you lose your opponent chose ${computerSelection}`;
+        } 
+        else {
+            ++yourScore;
+            return  `you won your opponent chose ${computerSelection}`;
+        }
     }
 }
 
-alert(singleRound("rOck",getComputerChoice()));
+
 
 
 
@@ -57,11 +76,148 @@ alert(singleRound("rOck",getComputerChoice()));
 //  you might want to change the return value to something more useful.
 // Feel free to create more “helper” functions if you think it would be useful.
 
-alert("Best out of 5 will win");
-let count=0;
 
-while(count<5){
-    let user = prompt("Rock paper or scissor");
-    alert(singleRound(user,getComputerChoice()));
-    count++; 
-}
+
+// Create three buttons, one for each selection. Add an event listener to the buttons that call your playRound
+//  function with the correct playerSelection every time a button is clicked
+// . (you can keep the console.logs for this step)
+
+const divv =document.querySelector('#container');
+const para = document.querySelector('p');
+
+const btn1 = document.createElement('button');
+btn1.classList.add('btn1');
+btn1.textContent="Rock"
+divv.appendChild(btn1);
+
+btn1.addEventListener('click',()=>{
+    para.textContent=singleRound(btn1.textContent,getComputerChoice());
+    para.textContent +=` Score of computer is ${computerScore}\n`;
+    para.textContent +=` your score is ${yourScore}`;
+    if(yourScore==5){
+        alert("you won")
+        const nextGame = prompt("yes or no");
+        if(nextGame=='y'){
+            alert("continue");
+            computerScore=0;
+            yourScore=0;
+        }
+        else{
+            return;
+        }
+    }
+    if(computerScore==5){
+        alert("you lose");
+        const nextGame = prompt("yes or no");
+        if(nextGame=='y'){
+            alert("continue");
+            computerScore=0;
+            yourScore=0;
+        }
+        else{
+            return;
+        }
+    }
+
+
+});
+
+
+const btn2 = document.createElement('button');
+btn2.classList.add('btn2');
+btn2.textContent="paper"
+divv.appendChild(btn2);
+
+btn2.addEventListener('click',()=>{
+    para.textContent=singleRound(btn2.textContent,getComputerChoice());
+
+    para.textContent +=` Score of computer is ${computerScore}\n`;
+ 
+    para.textContent +=` your score is ${yourScore}`;
+    if(yourScore==5){
+        alert("you won")
+        const nextGame = prompt("yes or no");
+        if(nextGame=='y'){
+            alert("continue");
+            computerScore=0;
+            yourScore=0;
+        }
+        else{
+            return;
+        }
+    }
+    if(computerScore==5){
+        alert("you lose");
+        const nextGame = prompt("yes or no");
+        if(nextGame=='y'){
+            alert("continue");
+            computerScore=0;
+            yourScore=0;
+        }
+        else{
+            return;
+        }
+    }
+
+
+    
+
+});
+
+
+const btn3 = document.createElement('button');
+btn3.classList.add('btn3');
+btn3.textContent="scissor"
+divv.appendChild(btn3);
+
+btn3.addEventListener('click',()=>{
+    para.textContent=singleRound(btn3.textContent,getComputerChoice());
+    para.textContent +=` Score of computer is ${computerScore}\n`;
+    para.textContent +=` your score is ${yourScore}`;
+
+    if(yourScore==5){
+        alert("you won")
+        const nextGame = prompt("yes or no");
+        if(nextGame=='y'){
+            alert("continue");
+            computerScore=0;
+            yourScore=0;
+        }
+        else{
+            return;
+        }
+    }
+    if(computerScore==5){
+        alert("you lose");
+        const nextGame = prompt("yes or no");
+        if(nextGame=='y'){
+            alert("continue");
+            computerScore=0;
+            yourScore=0;
+        }
+        else{
+            return;
+        }
+    }
+
+
+    
+});
+
+
+
+// Play Again
+
+const playAgain = document.createElement('button');
+playAgain.textContent="Reset";
+divv.appendChild(playAgain);
+
+playAgain.addEventListener('click',()=>{
+    playAgain.style.color ="red";
+    yourScore=0;
+    computerScore=0;
+    para.textContent ="score got reset";
+
+});
+
+
